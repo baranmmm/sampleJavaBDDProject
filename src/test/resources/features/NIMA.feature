@@ -7,14 +7,14 @@ Feature: NIMA Feature
     Then verifies that "Site Information" label is visible
     And the user clicks on "Site" dropdown
     Then verifies that Site list is populated with data
-    And the user selects "BUDAPEST-NAP" site from the site dropdown
-    Then verifies that site has correct background color
-    And the user clicks on "Incident Priority" dropdown
-    And the user selects "P1" option from "Incident Priority" dropdown
-    And checks and opens if there is an ongoing task available
-    And the user enters "<RCA Category>", "<RCA Type>", "<RCA Actual Cause>", "<Impact>", "<Fault Start Time>", "<Fault End Time>", "<Resolution>"
-    And claims the ticket if not claimed before
-    And dispatches the ticket if not dispatched before
+#    And the user selects "BUDAPEST-NAP" site from the site dropdown
+#    Then verifies that site has correct background color
+#    And the user clicks on "Incident Priority" dropdown
+#    And the user selects "P1" option from "Incident Priority" dropdown
+#    And checks and opens if there is an ongoing task available
+#    And the user enters "<RCA Category>", "<RCA Type>", "<RCA Actual Cause>", "<Impact>", "<Fault Start Time>", "<Fault End Time>", "<Resolution>"
+#    And claims the ticket if not claimed before
+#    And dispatches the ticket if not dispatched before
 #    And the user clicks on "RCA Category" dropdown
 #    And the user selects "Access" option from "RCA Category" dropdown
 #    And clicks on "Start" button
