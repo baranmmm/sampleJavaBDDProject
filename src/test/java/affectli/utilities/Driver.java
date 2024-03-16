@@ -24,10 +24,11 @@ public class Driver {
      * @return WebDriver driver
      */
     public static WebDriver getDriver() {
-
+        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
         String browser = ConfigurationReader.get("browser");
         switch (browser) {
             case "chrome":
+
                 ChromeOptions options = new ChromeOptions();
                 options.addArguments("--remote-allow-origins=*");
                 driver = new ChromeDriver(options);
