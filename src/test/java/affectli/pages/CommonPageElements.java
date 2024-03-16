@@ -8,6 +8,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import affectli.utilities.Driver;
 
+import java.util.List;
+import java.util.Random;
+
 public abstract class CommonPageElements extends Driver {
     public CommonPageElements(){
         PageFactory.initElements(driver, this);
@@ -58,6 +61,9 @@ public abstract class CommonPageElements extends Driver {
     @FindBy(xpath = "//span[contains(text(),'No')]//..")
     public WebElement confirmationPopupNoButton;
 
+    @FindBy(xpath = "//*[@id='menu-list-grow']//div[contains(@class,'MuiListItem-root')]")
+    public List<WebElement> listOfDropdownItemsAfterClickingDropdown;
+
     public void goToAModuleFromAppLauncher(String moduleName){
         appLauncherBtn.click();
         driver.findElement(By.xpath("//h6[contains(.,'"+moduleName+"')]//..//i")).click();
@@ -79,6 +85,7 @@ public abstract class CommonPageElements extends Driver {
     }
 
     public void clickOnDropdownByLabel(String dropdownLabel){
+        CommonSteps.waitFor(1);
         driver.findElement(By.xpath("//label[text()='"+dropdownLabel+"']//..//input")).click();
     }
 
@@ -94,10 +101,38 @@ public abstract class CommonPageElements extends Driver {
     }
 
     public void enterATextIntoATextarea(String textareaLabel, String textToEnter){
+        clickOnCloseButtonOfAnArea("Resolution");
+        CommonSteps.waitFor(1);
         CommonSteps.waitForClickability(driver.findElement(By.xpath("//label[contains(text(),'"+textareaLabel+"')]//..//div")), 10);
         driver.findElement(By.xpath("//label[contains(text(),'"+textareaLabel+"')]//..//div")).click();
         CommonSteps.waitFor(1);
         driver.findElement(By.xpath("//label[contains(text(),'"+textareaLabel+"')]//..//textarea")).sendKeys(textToEnter);
     }
+    public void selectAnItemInADropdown(String itemSelected, String dropdownLabel){
+        String currentlySelectedItemInDropdown = getCurrentlySelectedItemInDropdown(dropdownLabel);
+        if(!currentlySelectedItemInDropdown.equalsIgnoreCase(itemSelected)){
+            CommonSteps.clickWithJS(driver.findElement(By.xpath("//div[@role='tooltip']//*[contains(.,'"+itemSelected+"')][contains(@class,'MuiButtonBase')]")));
+        }
+    }
+
+    public void selectARandomItemInDropdown(){
+        int sizeOfElements = listOfDropdownItemsAfterClickingDropdown.size();
+        Random random = new Random();
+        int randomElement = random.nextInt(sizeOfElements);
+        CommonSteps.waitForClickability(listOfDropdownItemsAfterClickingDropdown.get(randomElement),5);
+        System.out.println(listOfDropdownItemsAfterClickingDropdown.get(randomElement).getText());
+        CommonSteps.clickWithJS(listOfDropdownItemsAfterClickingDropdown.get(randomElement));
+    }
+
+    public String getCurrentlySelectedItemInDropdown(String dropdownLabel){
+        return driver.findElement(By.xpath("//label[contains(.,'"+dropdownLabel+"')]//..//input")).getAttribute("value");
+    }
+
+    public void clickOnCloseButtonOfAnArea(String areaLabel){
+        if(driver.findElements(By.xpath("//label[contains(text(),'"+areaLabel+"')]//..//span[contains(@class,'mdi-close')]")).size()>0){
+            driver.findElement(By.xpath("//label[contains(text(),'"+areaLabel+"')]//..//span[contains(@class,'mdi-close')]")).click();
+        }
+    }
+
 
 }

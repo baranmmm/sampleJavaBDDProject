@@ -9,6 +9,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.List;
+
 public class NIMAPage extends CommonPageElements{
 
     @FindBy(css = "[name=\"place_select\"]")
@@ -28,6 +30,12 @@ public class NIMAPage extends CommonPageElements{
 
     @FindBy(name = "resolution")
     public WebElement resolutionTextarea;
+
+    @FindBy(xpath = "//td//a")
+    public WebElement ongoingTaskLink;
+
+    @FindBy(xpath = "//span[.='Claim Ticket']")
+    public List<WebElement> claimTicketButton;
 
     public void selectASiteFromSiteDropdown(String siteNameOrId){
         siteTxtbox.sendKeys(siteNameOrId);

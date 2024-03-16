@@ -43,6 +43,7 @@ public class LoginStepDefs extends CommonSteps {
 
     @And("the user logs out from Affectli")
     public void theUserLogsOutFromAffectli() {
+        waitForClickability(dashboardPage.profileBtn,5);
         dashboardPage.profileBtn.click();
         dashboardPage.logoutBtn.click();
         waitForVisibility(loginPage.loginTxt, 10);

@@ -27,7 +27,7 @@ public class Hooks {
             Log.info("TEST PASSED");
         }
         Log.info("****************TEST ENDED****************");
-        //Driver.closeDriver();
+        Driver.closeDriver();
     }
 
 

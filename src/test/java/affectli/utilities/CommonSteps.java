@@ -559,4 +559,18 @@ public class CommonSteps extends PageInitializer {
         return message;
     }
 
+    public static boolean isElementAvailable(By by){
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
+        try {
+            if(driver.findElement(by).isDisplayed()){
+                System.out.println(by.toString()+" element found");
+                return true;
+            }
+        } catch (NoSuchElementException e) {
+            System.out.println(by.toString()+" element not found");
+            return false;
+        }
+        return false;
+    }
+
 }
