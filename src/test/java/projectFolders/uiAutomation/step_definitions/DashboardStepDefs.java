@@ -2,6 +2,7 @@ package projectFolders.uiAutomation.step_definitions;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.By;
 import projectFolders._projectUtilities.Log;
 import projectFolders.uiAutomation.utilities.CommonUISteps;
 
@@ -15,6 +16,8 @@ public class DashboardStepDefs extends CommonUISteps {
     @When("the user clicks on {string} option in top navigation bar")
     public void theUserClicksOnOptionInTopNavigationBar(String option) {
         //business logic comes here
+
+
 
     }
 }
