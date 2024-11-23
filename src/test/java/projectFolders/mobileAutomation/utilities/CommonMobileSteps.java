@@ -624,5 +624,9 @@ public class CommonMobileSteps extends PageInitializer {
         }
     }
 
+    public static void main(String[] args) {
+        startAppiumServer();
+    }
+
 
 }

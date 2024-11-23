@@ -44,7 +44,7 @@ public class Hooks extends Log{
             Log.info("---------------------------------------------------------------------------------------");
         }
         endTestCase();
-        Driver.closeDriver();
+//        Driver.closeDriver();
     }
 
 

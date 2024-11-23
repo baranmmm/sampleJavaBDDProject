@@ -12,7 +12,7 @@ import org.junit.runner.RunWith;
         features = "src/test/resources/projectResources/uiResources/uiFeatures",
         glue = "projectFolders/uiAutomation/step_definitions",
         dryRun = false,
-        tags = "@demo"
+        tags = "@ebay"
 )
 public class CukesRunner {
 }

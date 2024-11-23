@@ -33,21 +33,21 @@ public class Hooks extends Log{
 
     @After
     public void tearDown(Scenario scenario) {
-        byte[] picture;
-        if (scenario.isFailed()) {
-            Log.info("---------------------------------------------------------------------------------------");
-            Log.error("***********************     MOBILE TEST FAILED    **************************");
-            Log.info("---------------------------------------------------------------------------------------");
-            // take screenshot and save it in /failed
-            picture = CommonMobileSteps.takeScreenshotOfMobile(scenario.getName()); // notes
-            scenario.attach(picture, "image/png", scenario.getName());
-        }else {
-            Log.info("---------------------------------------------------------------------------------------");
-            Log.info("***********************     MOBILE TEST PASSED    **************************");
-            Log.info("---------------------------------------------------------------------------------------");
-        }
-        endTestCase();
-        MobileDriver.closeDriver();
+//        byte[] picture;
+//        if (scenario.isFailed()) {
+//            Log.info("---------------------------------------------------------------------------------------");
+//            Log.error("***********************     MOBILE TEST FAILED    **************************");
+//            Log.info("---------------------------------------------------------------------------------------");
+//            // take screenshot and save it in /failed
+//            picture = CommonMobileSteps.takeScreenshotOfMobile(scenario.getName()); // notes
+//            scenario.attach(picture, "image/png", scenario.getName());
+//        }else {
+//            Log.info("---------------------------------------------------------------------------------------");
+//            Log.info("***********************     MOBILE TEST PASSED    **************************");
+//            Log.info("---------------------------------------------------------------------------------------");
+//        }
+//        endTestCase();
+//        MobileDriver.closeDriver();
     }
 
 

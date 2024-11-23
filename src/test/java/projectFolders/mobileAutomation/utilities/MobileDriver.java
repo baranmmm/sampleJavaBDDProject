@@ -1,5 +1,6 @@
 package projectFolders.mobileAutomation.utilities;
 
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
 import org.openqa.selenium.interactions.Actions;
@@ -10,7 +11,7 @@ import java.time.Duration;
 public class MobileDriver{
 
     public static UiAutomator2Options options;
-    public static AndroidDriver driver;
+    public static AppiumDriver driver;
     public static Actions actions;
 
 
@@ -21,8 +22,8 @@ public class MobileDriver{
         options.setApp(System.getProperty("user.dir")+"\\src\\test\\resources\\projectResources\\mobileResources\\mobileApps\\"+appName+".apk");
     }
 
-    public static AndroidDriver getMobileDriver() {
-        driver = new AndroidDriver(options);
+    public static AppiumDriver getMobileDriver() {
+        driver = new AppiumDriver(options);
         actions = new Actions(driver);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(120));
         return driver;
