@@ -17,7 +17,6 @@ public class EbayStepDefs extends BasePage {
             clickWithJS(homePage.acceptAllButton);
         }catch (Exception e){
         }
-
     }
 
     @When("the user searches for {string} item")
