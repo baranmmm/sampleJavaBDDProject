@@ -4,8 +4,6 @@ import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import projectFolders._projectUtilities.Log;
-import projectFolders.uiAutomation.utilities.CommonUISteps;
-import projectFolders.uiAutomation.utilities.Driver;
 
 public class Hooks extends Log{
 

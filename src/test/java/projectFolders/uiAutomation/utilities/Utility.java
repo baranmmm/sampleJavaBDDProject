@@ -8,7 +8,6 @@ import org.openqa.selenium.support.ui.*;
 import org.sikuli.script.FindFailed;
 import org.sikuli.script.Pattern;
 import org.sikuli.script.Screen;
-import projectFolders.uiAutomation.pages.PageInitializer;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -23,7 +22,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
-public class CommonUISteps extends PageInitializer {
+public class Utility extends Driver {
 
     public static void click(WebElement element) {
         waitForClickability(element, 10);
@@ -31,7 +30,7 @@ public class CommonUISteps extends PageInitializer {
     }
 
     public static void clickWithActions(WebElement element) {
-        waitForClickability(element,10);
+        waitForClickability(element, 10);
         actions.click(element).build().perform();
     }
 
@@ -40,13 +39,13 @@ public class CommonUISteps extends PageInitializer {
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
     }
 
-    public static void clickOnImage(String imageName){
+    public static void clickOnImage(String imageName) {
         String userDir = System.getProperty("user.dir");
-        String imageAddress = userDir+"\\src\\test\\resources\\projectResources\\uiResources\\uiImages\\" + imageName + ".png";
+        String imageAddress = userDir + "\\src\\test\\resources\\projectResources\\uiResources\\uiImages\\" + imageName + ".png";
         Screen screen = new Screen();
         Pattern pattern = new Pattern(imageAddress);
         try {
-            screen.wait(pattern,5000);
+            screen.wait(pattern, 5000);
             screen.click(pattern);
         } catch (FindFailed e) {
             e.printStackTrace();
@@ -55,20 +54,20 @@ public class CommonUISteps extends PageInitializer {
 
     public static void clickWithTimeOut(WebElement element, int timeout) {
         for (int i = 0; i < timeout; i++) {
-            if (element.isDisplayed()){
+            if (element.isDisplayed()) {
                 element.click();
                 break;
-            }else{
+            } else {
                 waitFor(1);
             }
         }
     }
 
-    public static void clickOnACoordinate(int xCoordinate, int yCoordinate){
+    public static void clickOnACoordinate(int xCoordinate, int yCoordinate) {
         Robot robot = null;
         try {
             robot = new Robot();
-            moveMouseToACoordinate(xCoordinate,yCoordinate);
+            moveMouseToACoordinate(xCoordinate, yCoordinate);
             robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
             robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
         } catch (AWTException e) {
@@ -78,12 +77,12 @@ public class CommonUISteps extends PageInitializer {
     }
 
     public static void doubleClickWithActions(WebElement element) {
-        waitForClickability(element,10);
+        waitForClickability(element, 10);
         actions.doubleClick(element).build().perform();
     }
 
     public static void rightClickWithActions(WebElement element) {
-        waitForClickability(element,10);
+        waitForClickability(element, 10);
         actions.contextClick(element).build().perform();
     }
 
@@ -93,16 +92,16 @@ public class CommonUISteps extends PageInitializer {
 
     public static void sendText(WebElement element, String text) {
         element.clear();
-        actions.sendKeys(element,text).build().perform();
+        actions.sendKeys(element, text).build().perform();
     }
 
     public static void sendKeysOnImage(String imageName, String text) {
         String userDir = System.getProperty("user.dir");
-        String imageAddress = userDir+"\\src\\test\\resources\\projectResources\\uiResources\\uiImages\\" + imageName + ".png";
+        String imageAddress = userDir + "\\src\\test\\resources\\projectResources\\uiResources\\uiImages\\" + imageName + ".png";
         Screen screen = new Screen();
         Pattern pattern = new Pattern(imageAddress);
         try {
-            screen.wait(pattern,5000);
+            screen.wait(pattern, 5000);
             screen.type(text);
         } catch (FindFailed e) {
             e.printStackTrace();
@@ -113,11 +112,24 @@ public class CommonUISteps extends PageInitializer {
         actions.clickAndHold(sourceElement).moveToElement(targetElement).release().build().perform();
     }
 
-    public static void releaseElement(WebElement element){
+    public static void releaseElement(WebElement element) {
         actions.release(element).build().perform();
     }
 
-    public static void switchToWindow(String targetTitle) {
+    public static void switchToWindowByIndex(int windowIndex) {
+        String originalWindow = driver.getWindowHandle();
+        Set<String> windowHandles = driver.getWindowHandles();
+        List<String> orderedHandles = new ArrayList<>();
+        orderedHandles.add(originalWindow);
+        for (String handle : windowHandles) {
+            if (!handle.equals(originalWindow)) {
+                orderedHandles.add(handle);
+            }
+        }
+        driver.switchTo().window(orderedHandles.get(windowIndex));
+    }
+
+    public static void switchToWindowByTitle(String targetTitle) {
         String origin = driver.getWindowHandle();
         for (String handle : driver.getWindowHandles()) {
             driver.switchTo().window(handle);
@@ -366,8 +378,9 @@ public class CommonUISteps extends PageInitializer {
 
     }
 
-    public static String getValidationErrorMessage(WebElement element){
-        String message =element.getAttribute("validationMessage");
+
+    public static String getValidationErrorMessage(WebElement element) {
+        String message = element.getAttribute("validationMessage");
         return message;
     }
 
@@ -375,14 +388,14 @@ public class CommonUISteps extends PageInitializer {
         String userDir = System.getProperty("user.dir");
         String imageAddress = userDir + "\\src\\test\\resources\\projectResources\\uiResources\\uiImages\\" + imageName + ".png";
         Screen screen = new Screen();
-        try{
+        try {
             Pattern pattern = new Pattern(imageAddress).exact();
-            if (screen.find(pattern)!= null) {
+            if (screen.find(pattern) != null) {
                 return true;
             } else {
                 return false;
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println("Image not found");
             return false;
         }
@@ -412,7 +425,7 @@ public class CommonUISteps extends PageInitializer {
         BufferedImage ImagePartial = null;
         try {
             Image = ImageIO.read(Screenshot);
-            ImagePartial = Image.getSubimage(xStartPoint, yStartPoint-115, width, height);
+            ImagePartial = Image.getSubimage(xStartPoint, yStartPoint - 115, width, height);
             ImageIO.write(ImagePartial, "png", Screenshot);
             FileUtils.copyFile(Screenshot, new File(System.getProperty("user.dir") + "\\src\\test\\resources\\projectResources\\uiResources\\uiImages\\" + imageName + ".png"));
         } catch (IOException e) {
@@ -512,18 +525,63 @@ public class CommonUISteps extends PageInitializer {
         }
     }
 
-    public static boolean isElementAvailable(By by){
+    public static boolean isElementAvailable(By by) {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
         try {
-            if(driver.findElement(by).isDisplayed()){
-                System.out.println(by.toString()+" element found");
+            if (driver.findElement(by).isDisplayed()) {
+                System.out.println(by.toString() + " element found");
                 return true;
             }
         } catch (NoSuchElementException e) {
-            System.out.println(by.toString()+" element not found");
+            System.out.println(by.toString() + " element not found");
             return false;
         }
         return false;
     }
+
+    public static void handleMaintenanceScreen(WebDriver driver) {
+            while(isElementAvailable(By.xpath("//h1[text()='Doing Maintenance']"))){
+                System.out.println("⚠️ Maintenance screen detected. Waiting and refreshing...");
+                try {
+                    Thread.sleep(5000); // Wait 5 seconds before retry
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                driver.navigate().refresh();
+            }
+
+
+    }
+
+
+    // 🔧 Utility: Detects ERR_EMPTY_RESPONSE or other fatal page failures
+    public boolean isBrokenPage() {
+        try {
+            String source = driver.getPageSource();
+            return source.contains("ERR_EMPTY_RESPONSE") || source.contains("This page isn’t working");
+        } catch (Exception e) {
+            return true;
+        }
+    }
+
+    // 🔧 Utility: Quits browser, runs mvn clean install, exits test
+    public void handleFatalErrorAndRestart() {
+        driver.quit();
+        runMavenCleanInstall();
+        System.exit(1);
+    }
+
+    // 🔧 Utility: Executes `mvn clean install` from Java
+    public void runMavenCleanInstall() {
+        try {
+            System.out.println("🔄 Running: mvn clean install");
+            Process process = Runtime.getRuntime().exec("mvn clean install");
+            process.waitFor();
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+            Thread.currentThread().interrupt();
+        }
+    }
+
 
 }

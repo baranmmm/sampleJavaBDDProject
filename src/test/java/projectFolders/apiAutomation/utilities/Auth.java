@@ -6,7 +6,7 @@ import org.hamcrest.Matchers;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import projectFolders._projectUtilities.ConfigurationReader;
-import projectFolders.uiAutomation.utilities.CommonUISteps;
+import projectFolders.uiAutomation.utilities.Utility;
 import projectFolders.uiAutomation.utilities.Driver;
 
 import java.io.File;
@@ -44,7 +44,7 @@ public class Auth {
         driver.findElement(By.cssSelector("[aria-label=\"Consent\"]")).click();
         driver.findElement(By.cssSelector("[title=\"Login\"]")).sendKeys(yopmailAddress+"@yopmail.com");
         driver.findElement(By.id("refreshbut")).click();
-        CommonUISteps.switchToFrame("ifmail");
+        Utility.switchToFrame("ifmail");
         apiKey = driver.findElement(By.xpath("(//strong)[1]")).getText();
         driver.quit();
 

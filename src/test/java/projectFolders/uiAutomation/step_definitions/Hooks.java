@@ -4,7 +4,7 @@ import projectFolders._projectUtilities.Log;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
-import projectFolders.uiAutomation.utilities.CommonUISteps;
+import projectFolders.uiAutomation.utilities.Utility;
 import projectFolders.uiAutomation.utilities.Driver;
 
 public class Hooks extends Log{
@@ -36,7 +36,7 @@ public class Hooks extends Log{
             Log.error("***********************     UI TEST FAILED    **************************");
             Log.info("---------------------------------------------------------------------------------------");
             // take screenshot and save it in /failed
-            picture = CommonUISteps.takeScreenshot("failed/" + scenario.getName()); // notes
+            picture = Utility.takeScreenshot("failed/" + scenario.getName()); // notes
             scenario.attach(picture, "image/png", scenario.getName());
         }else {
             Log.info("---------------------------------------------------------------------------------------");

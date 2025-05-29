@@ -1,10 +1,13 @@
 package projectFolders.uiAutomation.step_definitions;
 
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.When;
 import projectFolders._projectUtilities.ConfigurationReader;
-import projectFolders.uiAutomation.utilities.CommonUISteps;
+import projectFolders.uiAutomation.pages.BasePage;
+import projectFolders.uiAutomation.pages.PageInitializer;
 
-public class EbayStepDefs extends CommonUISteps {
+public class EbayStepDefs extends BasePage {
 
     @Given("the user goes to ebay website")
     public void theUserGoesToEbayWebsite() {
@@ -16,4 +19,16 @@ public class EbayStepDefs extends CommonUISteps {
         }
 
     }
+
+    @When("the user searches for {string} item")
+    public void theUserSearchesForItem(String searchItem) {
+        homePage.searchAnItem(searchItem);
+    }
+
+    @And("navigates to search results")
+    public void navigatesToSearchResults() {
+        homePage.clickOnSearchButton();
+    }
+
+
 }

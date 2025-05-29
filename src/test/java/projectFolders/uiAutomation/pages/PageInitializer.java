@@ -1,14 +1,16 @@
 package projectFolders.uiAutomation.pages;
 
-import projectFolders.uiAutomation.utilities.Driver;
+import projectFolders.uiAutomation.utilities.Utility;
 
-public class PageInitializer extends Driver {
+public class PageInitializer extends Utility {
 
-    public static DashboardPage dashboardPage;
     public static HomePage homePage;
+    public static SearchResultsPage searchResultsPage;
+    public static SearchItemPage searchItemPage;
 
     public static void initialize(){
-        dashboardPage = new DashboardPage();
         homePage = new HomePage();
+        searchResultsPage = new SearchResultsPage();
+        searchItemPage = new SearchItemPage();
     }
 }
